@@ -20,13 +20,13 @@ class Eeprom_repetierPlugin(octoprint.plugin.AssetPlugin,
 
     def get_template_configs(self):
         return [
-            dict(type="settings", template="eeprom_repetier_settings.jinja2", custom_bindings=True)
+            dict(type="tab", template="eeprom_repetier_tab.jinja2", custom_bindings=True)
         ]
 
     def get_update_information(self):
         return dict(
             systemcommandeditor=dict(
-                displayName="EEPROM Repetier Editor Plugin",
+                displayName="EEPROM (Repetier)",
                 displayVersion=self._plugin_version,
 
                 # version check: github repository
@@ -40,7 +40,7 @@ class Eeprom_repetierPlugin(octoprint.plugin.AssetPlugin,
             )
         )
 
-__plugin_name__ = "EEPROM Repetier Editor Plugin"
+__plugin_name__ = "EEPROM (Repetier)"
 
 def __plugin_load__():
     global __plugin_implementation__

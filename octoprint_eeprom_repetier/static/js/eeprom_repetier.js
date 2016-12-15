@@ -15,6 +15,11 @@ $(function() {
 
         self.isRepetierFirmware = ko.observable(false);
 
+        /* get eeprom data on connect after a fxed timeout. Disabled for now */
+        /*
+        self.getEepromOnConnectTimeout = undefined; 
+        */
+
         self.isConnected = ko.computed(function() {
             return self.connection.isOperational() || self.connection.isPrinting() ||
                    self.connection.isReady() || self.connection.isPaused();
@@ -23,7 +28,7 @@ $(function() {
         self.eepromData = ko.observableArray([]);
 
         self.onStartup = function() {
-            $('#settings_plugin_eeprom_repetier_link a').on('show', function(e) {
+            $('#tab_plugin_eeprom_repetier_link a').on('show', function(e) {
                 if (self.isConnected() && !self.isRepetierFirmware())
                     self._requestFirmwareInfo();
             });
@@ -66,12 +71,26 @@ $(function() {
             }
         };
 
+        /* get eeprom data on connect after a fxed timeout. Disabled for now.*/
+        /*
         self.onEventConnected = function() {
             self._requestFirmwareInfo();
-        }
+            if (OctoPrint.coreui.selectedTab == "#tab_plugin_eeprom_repetier") {
+                self.getEepromOnConnectTimeout = setTimeout(function () {
+                    self.getOnConnect();
+                }, 3000);
+            }
+            
+        };
+        */
+
+        self.onEventConnected = function() {
+            self._requestFirmwareInfo();
+        };
 
         self.onEventDisconnected = function() {
             self.isRepetierFirmware(false);
+            self.eepromData([]);
         };
 
         self.loadEeprom = function() {
@@ -89,6 +108,28 @@ $(function() {
             });
         };
 
+        /* get the eeprom data if the current tab is changed to the eeprom tab. may cause issues while printing if the current tab is changed frequently
+        so disabled pending proper testing */
+        /*
+        self.onTabChange = function (current, previous) {
+            if (current == "#tab_plugin_eeprom_repetier") {
+                self.getOnConnect();
+            } else if (previous == "#tab_plugin_eeprom_repetier") {
+                return;
+            }
+        };
+        
+        /* getOnConnect is linked primarily to getting the firmware info on connect if the current tab happens to be the eeprom tab but since that + tab change detection
+        is disabled, this serves no purpose anymore so disabled pending further testing */
+        /*
+        self.getOnConnect = function () {
+            if (self.isConnected() && self.isRepetierFirmware()) {
+                    self.loadEeprom();
+                } else {
+                    return;
+                }
+        };
+        */
         self._requestFirmwareInfo = function() {
             self.control.sendCustomCommand({ command: "M115" });
         };
@@ -111,7 +152,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push([
         EepromRepetierViewModel,
-        ["controlViewModel", "connectionViewModel"],
-        "#settings_plugin_eeprom_repetier"
+        ["controlViewModel", "connectionViewModel", "settingsViewModel"],
+        ["#tab_plugin_eeprom_repetier"]
     ]);
 });

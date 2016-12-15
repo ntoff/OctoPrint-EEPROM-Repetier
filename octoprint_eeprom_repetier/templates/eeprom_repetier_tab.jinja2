@@ -1,9 +1,10 @@
 <h4>EEprom Repetier Plugin</h4>
 This plugin is designed to get, change and save the values in the Eeprom of your Repetier Firmware based Machine.<br>
-Your machine is <span style="color: red" data-bind="visible: isConnected() && !isRepetierFirmware()">not</span> Repetier Firmware based
+Your machine is <span style="color: red" data-bind="visible: isConnected() && !isRepetierFirmware()">not</span> <span data-bind="visible: !isConnected()">not connected to a printer</span><span data-bind="visible: isConnected()">Repetier Firmware based</span>
 </>
 
-<form class="form-horizontal">
+
+<form class="form-horizontal" data-bind="visible: isRepetierFirmware() && isConnected()">
     <button class="btn" data-bind="enabled: isRepetierFirmware, click: loadEeprom">{{ _('Load EEprom') }}</button>
     <button class="btn" data-bind="enabled: isRepetierFirmware, click: saveEeprom">{{ _('Save EEprom') }}</button>
 </form>

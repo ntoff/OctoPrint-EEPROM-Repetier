@@ -18,7 +18,7 @@ plugin_version = "0.1.2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = """Makes it possible to change the EEprom values of Repetier Firmware through OctoPrint"""
+plugin_description = """Makes it possible to change the EEprom values of Repetier Firmware through OctoPrint (Tab version)"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
 plugin_author = "Marc Hannappel (Salandora)"
