@@ -23,31 +23,31 @@ class Eeprom_repetierPlugin(octoprint.plugin.AssetPlugin,
             dict(type="tab", template="eeprom_repetier_tab.jinja2", custom_bindings=True)
         ]
 
-    def get_update_information(self):
-        return dict(
-            systemcommandeditor=dict(
-                displayName="EEPROM (Repetier)",
-                displayVersion=self._plugin_version,
+    #def get_update_information(self):
+    #    return dict(
+    #        systemcommandeditor=dict(
+    #            displayName="EEPROM (Repetier)",
+    #            displayVersion=self._plugin_version,
+    #
+    #            # version check: github repository
+    #            type="github_release",
+    #            user="Salandora",
+    #            repo="OctoPrint-EEPROM-Repetier",
+    #            current=self._plugin_version,
+    #
+    #            # update method: pip
+    #            pip="https://github.com/Salandora/OctoPrint-EEPROM-Repetier/archive/{target_version}.zip"
+    #        )
+    #    )
 
-                # version check: github repository
-                type="github_release",
-                user="Salandora",
-                repo="OctoPrint-EEPROM-Repetier",
-                current=self._plugin_version,
-
-                # update method: pip
-                pip="https://github.com/Salandora/OctoPrint-EEPROM-Repetier/archive/{target_version}.zip"
-            )
-        )
-
-__plugin_name__ = "EEPROM (Repetier)"
+__plugin_name__ = "EEPROM Editor Tab (Repetier)"
 
 def __plugin_load__():
     global __plugin_implementation__
     __plugin_implementation__ = Eeprom_repetierPlugin()
 
-    global __plugin_hooks__
-    __plugin_hooks__ = {
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
-    }
+    #global __plugin_hooks__
+    #__plugin_hooks__ = {
+    #    "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
+    #}
 

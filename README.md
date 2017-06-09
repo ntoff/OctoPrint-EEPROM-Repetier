@@ -1,10 +1,7 @@
 # OctoPrint-EEprom-Repetier
 
-This plugin is designed to get, change and save the values in the Eeprom of your Repetier Firmware based Machine.
+Originally by Marc Hannappel (Salandora) https://github.com/Salandora/OctoPrint-EEPROM-Repetier
 
-## Setup
+Modified into a tab for quick access. Install manually using the url: 
 
-Install via the bundled [Plugin Manager](https://github.com/foosel/OctoPrint/wiki/Plugin:-Plugin-Manager)
-or manually using this URL:
-
-    https://github.com/Salandora/OctoPrint-EEPROM-Repetier/archive/master.zip
+`https://github.com/ntoff/OctoPrint-EEPROM-Repetier/archive/dev/tabview.zip`

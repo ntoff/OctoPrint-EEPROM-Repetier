@@ -3,6 +3,8 @@
 ########################################################################################################################
 ### Do not forget to adjust the following variables to your own plugin.
 
+#Originally by Marc Hannappel (Salandora), I've simply turned it into a tab rather than a page in the settings dialog
+
 # The plugin's identifier, has to be unique
 plugin_identifier = "eeprom_repetier"
 
@@ -14,20 +16,20 @@ plugin_package = "octoprint_eeprom_repetier"
 plugin_name = "OctoPrint-EEprom-Repetier"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.2"
+plugin_version = "Tab v0.0.1 Beta"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = """Makes it possible to change the EEprom values of Repetier Firmware through OctoPrint (Tab version)"""
+plugin_description = """Repetier firmware editor tab"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Marc Hannappel (Salandora)"
+plugin_author = "ntoff" #originally by Marc Hannappel (Salandora), I've just turned it into a tab
 
 # The plugin's author's mail address.
-plugin_author_email = "salandora@gmail.com"
+plugin_author_email = ""
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/Salandora/OctoPrint-EEprom-Repetier"
+plugin_url = "https://github.com/ntoff/OctoPrint-EEprom-Repetier"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"

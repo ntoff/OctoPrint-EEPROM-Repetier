@@ -7,6 +7,7 @@ $(function() {
 
         self.control = parameters[0];
         self.connection = parameters[1];
+        self.loginstate = parameters[2];
 
         self.firmwareRegEx = /FIRMWARE_NAME:([^\s]+)/i;
         self.repetierRegEx = /Repetier_([^\s]*)/i;
@@ -19,6 +20,9 @@ $(function() {
         /*
         self.getEepromOnConnectTimeout = undefined; 
         */
+        self.accessGranted = ko.computed(function() {
+            return self.loginstate.isAdmin();
+        });
 
         self.isConnected = ko.computed(function() {
             return self.connection.isOperational() || self.connection.isPrinting() ||
@@ -108,20 +112,17 @@ $(function() {
             });
         };
 
-        /* get the eeprom data if the current tab is changed to the eeprom tab. may cause issues while printing if the current tab is changed frequently
-        so disabled pending proper testing */
-        /*
+        //auto get eeprom data when tab switched into (doesn't always seem to work -_-)
         self.onTabChange = function (current, previous) {
-            if (current == "#tab_plugin_eeprom_repetier") {
+            if (current == "#tab_plugin_eeprom_repetier" && self.eepromData() == '') {
+                self._requestFirmwareInfo();
                 self.getOnConnect();
             } else if (previous == "#tab_plugin_eeprom_repetier") {
                 return;
             }
         };
         
-        /* getOnConnect is linked primarily to getting the firmware info on connect if the current tab happens to be the eeprom tab but since that + tab change detection
-        is disabled, this serves no purpose anymore so disabled pending further testing */
-        /*
+        //stupid name for this function, left over from something else I was doing.
         self.getOnConnect = function () {
             if (self.isConnected() && self.isRepetierFirmware()) {
                     self.loadEeprom();
@@ -129,7 +130,7 @@ $(function() {
                     return;
                 }
         };
-        */
+        
         self._requestFirmwareInfo = function() {
             self.control.sendCustomCommand({ command: "M115" });
         };
@@ -152,7 +153,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push([
         EepromRepetierViewModel,
-        ["controlViewModel", "connectionViewModel", "settingsViewModel"],
+        ["controlViewModel", "connectionViewModel", "loginStateViewModel"],
         ["#tab_plugin_eeprom_repetier"]
     ]);
 });
